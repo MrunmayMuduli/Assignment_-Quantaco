@@ -66,45 +66,8 @@ python app.py
 - **Elastic Beanstalk** or **EC2**: Create an instance and deploy the code.
 - Ensure security groups and VPC settings allow access to your database.
 
-### 7. CI/CD Pipeline Setup
-- **GitHub Actions**:
-  - Create a `.github/workflows/deploy.yml` file for CI/CD pipeline to automate deployment.
-  - Sample GitHub Action configuration:
-    ```yaml
-    name: CI/CD Pipeline
 
-    on:
-      push:
-        branches:
-          - main
-
-    jobs:
-      build-deploy:
-        runs-on: ubuntu-latest
-
-        steps:
-        - name: Checkout Code
-          uses: actions/checkout@v2
-
-        - name: Set up Python
-          uses: actions/setup-python@v2
-          with:
-            python-version: '3.8'
-
-        - name: Install Dependencies
-          run: |
-            pip install -r requirements.txt
-
-        - name: Deploy to AWS Elastic Beanstalk
-          env:
-            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          run: |
-            eb init -p python-3.8 weather-data-api --region us-east-1
-            eb create weather-env
-    ```
-
-### 8. Apply QA Checks in SQL
+### 7. Apply QA Checks in SQL
 - To ensure consistent data, create SQL checks to validate data quality.
 - Example:
   ```sql
